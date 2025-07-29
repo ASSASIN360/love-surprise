@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Final Surprise ❤️</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins&display=swap" rel="stylesheet" />
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to top right, #ffe6f0, #e0c3fc);
+      color: #333;
+      text-align: center;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+    .container {
+      max-width: 700px;
+      margin: auto;
+      padding: 40px 20px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      margin-top: 80px;
+      padding-bottom: 100px;
+    }
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.5em;
+      color: #e60073;
+    }
+    #finalMessage {
+      font-size: 1.2em;
+      margin-top: 30px;
+      line-height: 1.6;
+      color: #6d214f;
+      text-align: left;
+      padding: 20px;
+      background: #fff0f6;
+      border-radius: 15px;
+      max-height: 500px;
+      overflow-y: auto;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #e60073;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1em;
+      margin-top: 30px;
+    }
+    button:hover {
+      background-color: #cc005f;
+    }
+    .hearts-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 10;
+    }
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      transform: rotate(45deg);
+      animation: fall linear infinite;
+    }
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      border-radius: 50%;
+    }
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+    @keyframes fall {
+      0% {
+        transform: translateY(-10%) rotate(45deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(110vh) rotate(45deg);
+        opacity: 0;
+      }
+    }
+    #playMusicBtn {
+      margin-top: 10px;
+      background-color: #9b59b6;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 10px #e60073; }
+      50% { box-shadow: 0 0 25px #ff99cc; }
+      100% { box-shadow: 0 0 10px #e60073; }
+    }
+  </style>
+</head>
+<body>
+  <div class="hearts-container" id="heartsContainer"></div>
+
+  <div class="container">
+    <h1>Final Surprise 💖</h1>
+    <div id="finalMessage"></div>
+    <button onclick="goBack()">⬅ Back to First Page</button>
+    <br />
+    <button id="playMusicBtn" onclick="playMusic()">▶️ Play Music</button>
+
+    <!-- Click Me Button -->
+    <div style="margin-top: 40px;">
+      <button onclick="window.location.href='extra.html'" style="
+        padding: 12px 24px;
+        background-color: #e60073;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 1.2em;
+        cursor: pointer;
+        box-shadow: 0 0 15px #e60073;
+        animation: pulse 2s infinite;
+      ">
+        Click Me 💗
+      </button>
+    </div>
+  </div>
+
+  <!-- Background Music -->
+  <audio id="bgMusic" loop>
+    <source src="love.mp3" type="audio/mp3" />
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    const fullText = `
+My love for you can't be written in just one message... 🥺❤️
+
+From the moment we started this journey, you became the most special part of my world. 
+Every little thing you do fills my heart with joy. Your smile, your voice, your love—it’s all I ever need.
+
+You’ve stood by me through it all, and for that, I am forever grateful. These 9 months have been magical, and I can't wait for a lifetime more with you.
+
+I love you deeply, endlessly, and forever. 💖
+
+Always yours,
+[Your Name]
+`;
+
+    const messageContainer = document.getElementById("finalMessage");
+    let index = 0;
+
+    function typeEffect() {
+      if (index < fullText.length) {
+        messageContainer.innerHTML += fullText.charAt(index);
+        index++;
+        window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+        setTimeout(typeEffect, 30);
+      }
+    }
+    typeEffect();
+
+    // Falling hearts logic
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
+      document.getElementById("heartsContainer").appendChild(heart);
+      setTimeout(() => heart.remove(), 5000);
+    }
+    setInterval(createHeart, 300);
+
+    function goBack() {
+      window.location.href = "index.html";
+    }
+
+    function playMusic() {
+      const music = document.getElementById("bgMusic");
+      music.play();
+    }
+
+    window.addEventListener("load", () => {
+      const music = document.getElementById("bgMusic");
+      const playBtn = document.getElementById("playMusicBtn");
+
+      if (sessionStorage.getItem("playMusic") === "true") {
+        music.play().then(() => {
+          playBtn.style.display = "none";
+        }).catch(() => {
+          playBtn.style.display = "inline-block";
+        });
+      } else {
+        playBtn.style.display = "inline-block";
+      }
+    });
+  </script>
+</body>
+</html>

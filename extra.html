@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Love You ❤️</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet" />
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background: linear-gradient(to bottom right, #ffc3a0, #ffafbd);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-family: 'Great Vibes', cursive;
+      color: #e60073;
+      overflow: hidden;
+    }
+
+    #countdown {
+      font-size: 2em;
+      margin-bottom: 30px;
+      font-family: 'Poppins', sans-serif;
+      color: #6d214f;
+      background: rgba(255,255,255,0.3);
+      padding: 10px 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #fff;
+      z-index: 1;
+    }
+
+    h1 {
+      font-size: 5em;
+      animation: pulse 1.5s infinite;
+      z-index: 1;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); color: #ff0066; }
+      100% { transform: scale(1); }
+    }
+
+    .hearts-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      transform: rotate(45deg);
+      animation: fall linear infinite;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-10%) rotate(45deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(110vh) rotate(45deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="hearts-container" id="heartsContainer"></div>
+
+  <!-- Countdown -->
+  <div id="countdown">Loading countdown...</div>
+
+  <!-- Love Message -->
+  <h1>LOVE YOU ❤️</h1>
+
+  <script>
+    // Falling hearts animation
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
+      document.getElementById("heartsContainer").appendChild(heart);
+      setTimeout(() => heart.remove(), 5000);
+    }
+    setInterval(createHeart, 300);
+
+    // Countdown timer logic
+    const countdownEl = document.getElementById("countdown");
+
+    // Set your anniversary or target date here:
+    const targetDate = new Date("2025-11-30T00:00:00").getTime(); // 1-year anniversary from now
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if (distance <= 0) {
+        countdownEl.innerHTML = "Happy Anniversary! 🎉";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      countdownEl.innerHTML = `Countdown to 1 Year Anniversary: <br><strong>${days}d ${hours}h ${minutes}m ${seconds}s</strong>`;
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown(); // Call once immediately
+  </script>
+</body>
+</html>

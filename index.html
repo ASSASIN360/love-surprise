@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Happy 9 Months ❤️</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="hearts-container"></div>
+
+  <!-- Countdown -->
+  <div class="countdown">
+    <h2></h2>
+    <div id="novemberCountdown"></div>
+  </div>
+
+  <div class="container">
+    <h1 class="typewriter">Happy 9 Months, My Love!</h1>
+    <img src="your-photo.jpg" alt="Us" class="photo" />
+    <p class="message">
+      It's been 9 amazing months with you. Even from miles away, you make my heart feel at home.
+      Here's to many more months, memories, and milestones together.
+    </p>
+
+    <button id="revealButton">Click for a Surprise 💌</button>
+
+    <div id="surpriseContent" class="hidden">
+      <div id="secretMessage">
+        <p id="typingMessage"></p>
+      </div>
+
+      <button id="moreButton" class="hidden">Click for More Magic ✨</button>
+
+      <div id="moreSurprises">
+        <video id="loveVideo" class="hidden" controls width="100%">
+          <source src="her-video.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+
+        <button id="finalSurpriseButton" class="hidden" onclick="goToSurprise()">Click for Final Surprise 🎁</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
