@@ -110,6 +110,29 @@
       50% { box-shadow: 0 0 25px #ff99cc; }
       100% { box-shadow: 0 0 10px #e60073; }
     }
+
+    /* ✅ Mobile Responsive Styling */
+    @media (max-width: 600px) {
+      .container {
+        padding: 20px 15px;
+        margin-top: 40px;
+      }
+
+      #finalMessage {
+        font-size: 1em;
+        padding: 15px;
+        max-height: 300px;
+      }
+
+      button {
+        font-size: 0.95em;
+        padding: 8px 16px;
+      }
+
+      h1 {
+        font-size: 2em;
+      }
+    }
   </style>
 </head>
 <body>
@@ -122,7 +145,6 @@
     <br />
     <button id="playMusicBtn" onclick="playMusic()">▶️ Play Music</button>
 
-    <!-- Click Me Button -->
     <div style="margin-top: 40px;">
       <button onclick="window.location.href='extra.html'" style="
         padding: 12px 24px;
@@ -140,18 +162,20 @@
     </div>
   </div>
 
-  <!-- Background Music -->
   <audio id="bgMusic" loop>
     <source src="love.mp3" type="audio/mp3" />
     Your browser does not support the audio element.
   </audio>
 
   <script>
-    const fullText = `
-My love for you can't be written in just one message... 🥺❤️
+    const fullText = `My love for you can't be written in just one message... 🥺❤️
+
+From the moment we started this journey, you became the most special part of my world. 
+Every little thing you do fills my heart with joy. Your smile, your voice, your love—it’s all I ever need.
 Happiest 9th anniversary bbu 😽 i can't believe that we reached till here 
 The journey was very tough till now we fighted a lot in these 9 months some fights were very serious but we still survived that ❤  and i hope in future this only will happen 😽 .
-The day we got engaged i thought ki it will not work more than 4-5 days thb. But as the days passed i got attached to you your voice your smile your everything😚. The things u shared with me your past life and all trauma that made me feel that someone is really trusting me🤧 and really u are strongest girl sorry my strongest girl 😘 . As we talked everyday the bond between us just got stronger and stronger😅.
+The day we got engaged i thought ki it will not work more than 4-5 days thb. But as the days passed i got attached to you your voice your smile your everything😚. The things u shared with me your past life and all trauma that made me feel that someone is really trusting me🤧 and really u are strongest girl sorry my strongest girl 😘 .
+As we talked everyday the bond between us just got stronger and stronger😅.
 The daily conversation between us feels like we are talking face to face 😅 
 That calls we do when no one is home feels very filmy type 😂 but i enjoy doing that on vc toh i feel ki i should come through the screen and hug u😭🤌 on cll the way u speak and make joke is something i am in love with and i hope it remains as it is 🤧.
 Everytime u get gussa i love to pamper u and calm you down 😅 . The way u act when u are really angry sometime haunts me 🤧 .
@@ -169,8 +193,7 @@ At the end i will say only that stay same as u are 🫶.
 My Aloooooooo🥔 
 My golu molu my kucchu pucchu 🫶😘.
 Just stay with me ❤ 
-Your bbu loves u so much ❤🥔
-`;
+Your bbu loves u so much ❤🥔`;
 
     const messageContainer = document.getElementById("finalMessage");
     let index = 0;
@@ -178,14 +201,18 @@ Your bbu loves u so much ❤🥔
     function typeEffect() {
       if (index < fullText.length) {
         messageContainer.innerHTML += fullText.charAt(index);
+        
+        // ✅ Scroll every 10 characters instead of each one
+        if (index % 10 === 0) {
+          window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+        }
+
         index++;
-        window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
         setTimeout(typeEffect, 30);
       }
     }
     typeEffect();
 
-    // Falling hearts logic
     function createHeart() {
       const heart = document.createElement('div');
       heart.classList.add('heart');
@@ -203,6 +230,7 @@ Your bbu loves u so much ❤🥔
     function playMusic() {
       const music = document.getElementById("bgMusic");
       music.play();
+      sessionStorage.setItem("playMusic", "true");
     }
 
     window.addEventListener("load", () => {
